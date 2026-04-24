@@ -241,8 +241,37 @@ header h1 {
 }
 
 .sources-content {
-    padding: 0 0.5rem 0.25rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.25rem 0.5rem 0.5rem 0.5rem;
+}
+
+.source-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.75rem;
+    background: var(--background);
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    font-size: 0.75rem;
     color: var(--text-secondary);
+    transition: border-color 0.15s ease, color 0.15s ease;
+    white-space: nowrap;
+}
+
+.source-chip:hover {
+    border-color: var(--primary-color);
+    color: var(--text-primary);
+}
+
+.source-chip a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.source-chip a:hover {
+    color: var(--primary-color);
 }
 
 /* Markdown formatting styles */
@@ -489,6 +518,31 @@ header h1 {
 details[open] .stats-header::before,
 details[open] .suggested-header::before {
     transform: rotate(90deg);
+}
+
+/* New Chat Button */
+.new-chat-button {
+    width: 100%;
+    padding: 0.5rem 0;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    text-align: left;
+}
+
+.new-chat-button:hover {
+    color: var(--primary-color);
+}
+
+.new-chat-button:focus {
+    outline: none;
+    color: var(--primary-color);
 }
 
 /* Course Stats in Sidebar */

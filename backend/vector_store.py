@@ -264,4 +264,28 @@ class VectorStore:
             return None
         except Exception as e:
             print(f"Error getting lesson link: {e}")
-    
+
+    def get_course_outline(self, course_name: str) -> Optional[Dict[str, Any]]:
+        """Resolve a partial course name and return its full outline."""
+        import json
+        resolved_title = self._resolve_course_name(course_name)
+        if not resolved_title:
+            return None
+        try:
+            results = self.course_catalog.get(ids=[resolved_title])
+            if not (results and results.get('metadatas') and results['metadatas']):
+                return None
+            metadata = results['metadatas'][0]
+            lessons_raw = json.loads(metadata.get('lessons_json', '[]'))
+            lessons = [
+                {"lesson_number": l.get("lesson_number"), "lesson_title": l.get("lesson_title")}
+                for l in lessons_raw
+            ]
+            return {
+                "title": metadata.get("title", resolved_title),
+                "course_link": metadata.get("course_link"),
+                "lessons": lessons,
+            }
+        except Exception as e:
+            print(f"Error retrieving course outline: {e}")
+            return None

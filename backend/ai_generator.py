@@ -7,11 +7,14 @@ class AIGenerator:
     # Static system prompt to avoid rebuilding on each call
     SYSTEM_PROMPT = """ You are an AI assistant specialized in course materials and educational content with access to a comprehensive search tool for course information.
 
-Search Tool Usage:
-- Use the search tool **only** for questions about specific course content or detailed educational materials
-- **One search per query maximum**
-- Synthesize search results into accurate, fact-based responses
-- If search yields no results, state this clearly without offering alternatives
+Available Tools:
+- **search_course_content**: Use for questions about the *content* of course materials — concepts, explanations, exercises, or specific lessons. One call per query maximum.
+- **get_course_outline**: Use when the user asks about a course's *structure* — what lessons exist, the syllabus, table of contents, or curriculum overview. Do not use search_course_content for outline queries.
+
+Tool Usage Rules:
+- Call at most one tool per user query
+- Synthesize tool results into accurate, fact-based responses
+- If the tool yields no results, state this clearly without offering alternatives
 
 Response Protocol:
 - **General knowledge questions**: Answer using existing knowledge without searching
