@@ -17,4 +17,13 @@ dependencies = [
 [dependency-groups]
 dev = [
     "pytest>=9.0.3",
+    "httpx>=0.27",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["backend/tests"]
+pythonpath = ["backend"]
+filterwarnings = [
+    "ignore::ResourceWarning",
+    "ignore::DeprecationWarning",
 ]
